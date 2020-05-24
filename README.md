@@ -22,6 +22,7 @@ But by learning how the demo scene is made and setup you'll be able to get (more
 CREDITS:
 - original physX plugin was made by Chris Kahler
 - based on ackphysX community plugin by Christian Behrenberg aka (HeelX) https://sourceforge.net/p/a8physx/home/Home/
+- prototype.wad by Damocles (can be also found in AUM 100)
 
 SCREENSHOTS:
 ![Alt text](https://github.com/3RUN/Acknex-CCT/blob/master/screenshots/shot_0.jpg?raw=true "Preview 1.")
