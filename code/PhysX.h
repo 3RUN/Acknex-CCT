@@ -3,7 +3,7 @@
 
 	float fixedDeltaTime = 0;
 
-	#define PRAGMA_BIND "ackphysX.dll";
+	#define PRAGMA_BIND "PhysX.dll";
 	#define PRAGMA_BIND "PhysXCore.dll";
 	#define PRAGMA_BIND "PhysXDevice.dll";
 	#define PRAGMA_BIND "PhysXLoader.dll";

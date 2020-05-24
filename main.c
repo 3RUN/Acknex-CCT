@@ -12,7 +12,7 @@
 var pX_gravity = 9.81;
 var pX_unitscale = 0.075;
 
-#include "ackphysX.h"
+#include "PhysX.h"
 #include "defines.h"
 #include "cct.h"
 #include "player.h"
