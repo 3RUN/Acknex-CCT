@@ -2,6 +2,7 @@
 #include <acknex.h>
 #include <default.c>
 #include <windows.h>
+#include <ackphysx.h>
 
 #define PRAGMA_POINTER
 
@@ -12,7 +13,6 @@
 var pX_gravity = 9.81;
 var pX_unitscale = 0.075;
 
-#include "PhysX.h"
 #include "defines.h"
 #include "cct.h"
 #include "player.h"
@@ -122,7 +122,4 @@ void main()
 	sun_light = 50;
 	vec_set(&sun_color, vector(128, 128, 128));
 	vec_set(&ambient_color, vector(0, 0, 0));
-	
-	// test that .dll was connected !
-	ackphysxHelloWorld();
 }
