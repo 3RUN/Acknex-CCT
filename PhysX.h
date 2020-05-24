@@ -1541,6 +1541,6 @@
 		#endif
 	}
 
-	void ackphysxHelloWorld ();
+	void ackphysxHelloWorld();
 
 #endif /* ackphysx_h */
