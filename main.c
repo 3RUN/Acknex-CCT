@@ -123,5 +123,6 @@ void main()
 	vec_set(&sun_color, vector(128, 128, 128));
 	vec_set(&ambient_color, vector(0, 0, 0));
 	
+	// test that .dll was connected !
 	ackphysxHelloWorld();
 }
