@@ -10,6 +10,7 @@ It currently supports:
 - inertia
 - crawling (UpdateCharacterExtents)
 - sliding on slopes (better not to use)
+- 3d camera with collision detection and zooming
 
 Maybe I'll add:
 - kinematic platforms
@@ -23,4 +24,4 @@ CREDITS:
 - based on ackphysX community plugin by Christian Behrenberg aka (HeelX) https://sourceforge.net/p/a8physx/home/Home/
 
 SCREENSHOTS:
-![Alt text](https://github.com/3RUN/Acknex-Ragdolls/blob/master/screenshots/shot_0.jpg?raw=true "Preview 1.")
+![Alt text](https://github.com/3RUN/Acknex-CCT/blob/master/screenshots/shot_0.jpg?raw=true "Preview 1.")
