@@ -1,0 +1,51 @@
+Log of A8 Engine 8.47.1 run at Sun May 24 21:36:11 2020
+magom on Windows NT/2000/XP version 6.2 Build 9200
+Options main.c -diag -ta
+App: C:\Program Files (x86)\GStudio8\acknex.exe in C:\Users\magom\Desktop\cct\
+
+MM mixer opened
+DSOUND device opened
+DI interface opened
+Start Window opened(c) Conitec - www.3dgamestudio.com
+A8 Engine - Pro Edition V8.47.1 - Mar  9 2016
+Development version
+Registered to: Magomet Kochkarov
+
+DI Microsoft PC-joystick driver 4 axes 12 buttons initialized
+Mouse found
+Joystick found
+Динамики (Realtek High Definition Audio) opened
+Radeon RX 580 Series pure T&L device 1ff9 detected
+D3D device Radeon RX 580 Series 1ff9 selected.
+ackphysx.dll opened
+acknet.dll opened
+ackoal.dll opened
+ackphysX.dll opened
+Compiling MAIN.C - [Esc] to abort....
+PATH code\
+PATH resources\..........
+on_exit_px: function not found
+on_level_load_px: function not found
+pXmat34isFinite@1: function not found... 0.362 sec
+Running MAIN.C.
+2 objects
+Main started at 1.454
+Opening PhysX... ok
+D3D_Init Window: 1024x768 -> Window: 1x1024x768x32
+Video memory found: 4090 MB
+LevelInit at 3.515
+1 entities 0 cameras 0 lights 0 sounds 0 paths
+ 2 lmaps 3 textures 19 meshes 19 submeshes 204 faces...ok
+LevelReady at 3.526
+def_startup started
+Main loop at 3.528....
+1st frame with 4090 MB. at 3.551
+Normal exit at 16.416
+Close level,DLL,objects
+Free input,funcs,panels,defs,syns,views,strings,vars..ok
+Free sounds,bmaps,fonts,hash,defs1,script..ok
+Close dx,multimedia,D3D,engine,nexus..ok
+A8 Engine - Pro Edition V8.47.1 - Mar  9 2016
+(c) Conitec - www.3dgamestudio.com
+Registered to: Magomet Kochkarov
+Close window at 16.451
