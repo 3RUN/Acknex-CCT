@@ -28,6 +28,7 @@ var pX_unitscale = 0.075;
 #include "props_helper.h"
 #include "props_platform.h"
 #include "props_elevator.h"
+#include "props_terrain.h"
 
 #include "defines.c"
 #include "cct.c"
@@ -40,6 +41,7 @@ var pX_unitscale = 0.075;
 #include "props_helper.c"
 #include "props_platform.c"
 #include "props_elevator.c"
+#include "props_terrain.c"
 
 void engine_lock_mouse()
 {

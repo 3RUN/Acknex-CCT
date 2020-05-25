@@ -13,9 +13,17 @@ It currently supports:
 - 3d camera with collision detection and zooming
 - kinematic platform (following the path) + elevator (moving to target position and back)
 - added helper functions to check, if props have smashed the cct
+- terrain support
 
 Known issues:
 - cct can (rarely) fall through kinematic elevator, if it's moving upwards and cct is falling on it
+- problems with normal detection (can be seen in the video), on polygon edges normal.z can't glitch... 
+	this causes some weird movement on slopes if sliding is enabled, to void this problem, disable sliding
+	also in screenshot folder you can see that 'Use Tesselation' flag in Map Compiler makes even more polygons/edges
+	thus that will cause a lot of jittering on slope movement (cause on edges normal.z goes beyond the slope limit - can be seen in video)
+
+You can see cct in motion on my youtube channel:
+https://youtu.be/mfTzt57JoAw
 
 # HOW TO USE ?
 There are lots of limitations to this movement template, mainly caused by physX itself (old SDK).

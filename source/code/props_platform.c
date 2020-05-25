@@ -100,7 +100,7 @@ void platform_update(ENTITY *ent)
 				}
 				
 				// set proper position
-				vec_set(&ent->x, &props->origin);
+				pXent_setposition(ent, &ent->OFFSET_X_);
 				
 				ent->OBJ_TIMER = props->delay_time;
 				ent->OBJ_STATE = DELAY;
@@ -129,7 +129,7 @@ void platform_update(ENTITY *ent)
 				}
 				
 				// set proper position
-				vec_set(&ent->x, &ent->OFFSET_X_);
+				pXent_setposition(ent, &props->origin);
 				
 				// switch to delay
 				ent->OBJ_TIMER = props->delay_time;
@@ -149,7 +149,20 @@ void platform_update(ENTITY *ent)
 			{
 				// reset check
 				ent->OBJ_CHECK = false;
-				ent->OBJ_STATE = CLOSE;
+				
+				// if we reached the target position
+				if(props->old_state == OPEN)
+				{
+					ent->OBJ_STATE = CLOSE;
+				}
+				else if(props->old_state == CLOSE) // returned back to the start ?
+				{
+					ent->OBJ_STATE = OPEN;
+				}
+				else
+				{
+					ent->OBJ_STATE = OPEN;
+				}
 			}
 			
 			break;
