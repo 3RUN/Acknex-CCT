@@ -11,7 +11,7 @@ It currently supports:
 - crawling (UpdateCharacterExtents)
 - sliding on slopes (better not to use)
 - 3d camera with collision detection and zooming
-- kinematic platform + elevator
+- kinematic platform (following the path) + elevator (moving to target position and back)
 - added helper functions to check, if props have smashed the cct
 
 Known issues:
