@@ -20,6 +20,12 @@
 	#define DELAY 3
 	#define DEAD 4
 
+	// skills used by all props
+	#define ID skill1
+	#define OFFSET_X_ skill2
+	#define OFFSET_Y_ skill3
+	#define OFFSET_Z_ skill4
+
 	// other defines
 	#define OBJ_STRUCT skill50
 	#define OBJ_CCT_STRUCT skill51
@@ -27,7 +33,11 @@
 	#define OBJ_ALLOW_MOVE skill53
 	#define OBJ_STATE skill54
 	#define OBJ_CAN_MOVE_CCT skill55
-	#define OBJ_TYPE skill56
+	#define OBJ_SND_HANDLE skill56
+	#define OBJ_TIMER skill57
+	#define OBJ_CHECK skill58
+	#define OBJ_DELETE skill59
+	#define OBJ_TYPE skill60
 	#define TYPE_NONE 0
 	#define TYPE_PLAYER 1
 	#define TYPE_PLATFORM 2
@@ -36,5 +46,4 @@
 	// alternative for c_trace (needed because we don't use my pointers and while loops with 'wait')
 	var ent_trace(ENTITY *ent, VECTOR *from, VECTOR *to, var mode);
 	
-	#include "defines.c"
 #endif

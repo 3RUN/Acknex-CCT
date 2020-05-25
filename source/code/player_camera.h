@@ -10,5 +10,4 @@
 	// simple 3d camera with zoom in/out + collision detection
 	void player_camera_update(ENTITY *ent, PLAYER *hero, CCT *cct);
 
-	#include "player_camera.c"
 #endif

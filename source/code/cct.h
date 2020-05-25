@@ -5,6 +5,9 @@
 	// I highly recommend using only capsule hull!
 	// box will get stuck in lots of situations and not supported by this template!
 	#define CCT_HULL PH_CAPSULE
+	
+	// max size, used for 'smashed' check
+	#define CCT_MAX_SIZE 64
 
 	// bbox model
 	STRING *cct_capsule_mdl = "capsule.mdl";
@@ -24,6 +27,7 @@
 		VECTOR surface_normal;
 		VECTOR surface_speed;
 		var ground_info;
+		var distance_to_ground;
 		
 		// cct parameters
 		float cct_step_height;
@@ -97,6 +101,4 @@
 	// pointer is taken from given entity's OBJ_CCT_STRUCT skill
 	void delete_cct_struct(ENTITY *ent);
 
-	#include "cct.c"
-	#include "cct_logic.h"
 #endif

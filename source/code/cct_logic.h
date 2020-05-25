@@ -69,5 +69,4 @@
 	// update all movement for given cct
 	void cct_update(ENTITY *ent, CCT *cct);
 
-	#include "cct_logic.c"
 #endif

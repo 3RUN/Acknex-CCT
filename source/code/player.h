@@ -26,7 +26,4 @@
 	// free player structure from memory from given entity
 	var delete_player_struct(ENTITY *ent);
 
-	#include "player.c"
-	#include "player_camera.h"
-	#include "player_logic.h"
 #endif

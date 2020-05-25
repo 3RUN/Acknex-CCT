@@ -11,9 +11,11 @@ It currently supports:
 - crawling (UpdateCharacterExtents)
 - sliding on slopes (better not to use)
 - 3d camera with collision detection and zooming
+- kinematic platform + elevator
+- added helper functions to check, if props have smashed the cct
 
-Maybe I'll add:
-- kinematic platforms
+Known issues:
+- cct can (rarely) fall through kinematic elevator, if it's moving upwards and cct is falling on it
 
 # HOW TO USE ?
 There are lots of limitations to this movement template, mainly caused by physX itself (old SDK).
@@ -26,6 +28,9 @@ CREDITS:
 - original physX plugin was made by Chris Kahler
 - based on ackphysX community plugin by Christian Behrenberg aka (HeelX) https://sourceforge.net/p/a8physx/home/Home/
 - prototype.wad by Damocles (can be also found in AUM 100)
+- elevator and platform sounds are taken from Freedoom project https://freedoom.github.io/ https://github.com/freedoom/freedoom
 
 SCREENSHOTS:
 ![Alt text](https://github.com/3RUN/Acknex-CCT/blob/master/screenshots/shot_0.jpg?raw=true "Preview 1.")
+![Alt text](https://github.com/3RUN/Acknex-CCT/blob/master/screenshots/shot_1.jpg?raw=true "Preview 2.")
+![Alt text](https://github.com/3RUN/Acknex-CCT/blob/master/screenshots/shot_2.jpg?raw=true "Preview 3.")

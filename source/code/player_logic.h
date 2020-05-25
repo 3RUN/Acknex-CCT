@@ -13,8 +13,4 @@
 	// update all player's stuff
 	void player_update(ENTITY *ent);
 	
-	// main player's action (used in WED)
-	action player_controller();
-
-	#include "player_logic.c"
 #endif

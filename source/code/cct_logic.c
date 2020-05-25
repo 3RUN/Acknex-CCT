@@ -351,19 +351,6 @@ void cct_horizontal_movement(ENTITY *ent, CCT *cct)
 	cct->dist.y = cct->speed.y * time_step;
 	cct->dist.z = 0;
 	
-	// calculate absolute distance to move
-	cct->abs_dist.x = cct->abs_force.x * time_step;
-	cct->abs_dist.y = cct->abs_force.y * time_step;
-	cct->abs_dist.z = cct->abs_force.z * time_step;
-	
-	// add the speed given by the ground elasticity and the jumping force
-	if(cct->is_grounded == true)
-	{
-		// if the actor is standing on a moving platform, add it's horizontal displacement
-		cct->abs_dist.x += cct->surface_speed.x;
-		cct->abs_dist.y += cct->surface_speed.y;
-	}
-	
 	// relative distance
 	// speed, dist vectors aren't set to 0 when there is no input... they are around 0.001 - 0.002
 	// I guess that's because of var (and it's inaccuracy), but I'm not 100% sure
@@ -375,6 +362,33 @@ void cct_horizontal_movement(ENTITY *ent, CCT *cct)
 	
 	// gravity
 	cct->movement_contact = pXent_move(ent, nullvector, vector(0, 0, cct->z_force * time_step));
+	
+	// calculate absolute distance to move
+	cct->abs_dist.x = cct->abs_force.x * time_step;
+	cct->abs_dist.y = cct->abs_force.y * time_step;
+	cct->abs_dist.z = cct->abs_force.z * time_step;
+	
+	// add the speed given by the ground elasticity and the jumping force
+	if(cct->is_grounded == true || cct->distance_to_ground < CCT_MAX_SIZE)
+	{
+		// if the actor is standing on a moving platform, add it's displacement
+		if(vec_length(&cct->surface_speed) > 0.05)
+		{
+			cct->abs_dist.x += cct->surface_speed.x;
+			cct->abs_dist.y += cct->surface_speed.y;
+			cct->abs_dist.z += cct->surface_speed.z;
+			
+			// fake standing on the ground
+			cct->is_grounded = true;
+			cct->movement_contact = CONTACT_GROUND;
+			
+			// don't allow to accelerate downwards too much
+			if(cct->z_force < -pX_gravity * 2)
+			{
+				cct->z_force = -pX_gravity * 2;
+			}
+		}
+	}
 	
 	// absolute distance
 	pXent_move(ent, nullvector, &cct->abs_dist);
@@ -411,7 +425,7 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 	VECTOR from, to, target_vec;
 	vec_set(&from, &ent->x);
 	vec_set(&to, &from);
-	to.z -= cct->stand_max_z * 1.25;
+	to.z -= cct->stand_max_z * 2;
 	
 	// save bbox size
 	var cct_min_z = ent->min_z;
@@ -455,15 +469,17 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 			// if this entity can move us
 			if(your->OBJ_CAN_MOVE_CCT == true)
 			{
-				/*
 				// If you having moving platform, you can take it's speed X and Y here
 				// and cct will automatically move with it, as it's trace hits the platform
 				// then add it's XY speed to our movement
-				PROPS *props = get_props(you);
-				cct->surface_speed.x = props->diff.x;
-				cct->surface_speed.y = props->diff.y;
-				// Z speed is not necessary - this is done by the height adaption
-				*/
+				PROPS *props = get_props_struct(you);
+				
+				if(vec_length(&props->diff) > 0.05)
+				{
+					cct->surface_speed.x = props->diff.x;
+					cct->surface_speed.y = props->diff.y;
+					cct->surface_speed.z = props->diff.z;
+				}
 			}
 			
 			if(your->OBJ_TYPE == TYPE_ELEVATOR || your->OBJ_TYPE == TYPE_PLATFORM)
@@ -474,7 +490,9 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 				}
 			}
 		}
-	}	
+	}
+	
+	cct->distance_to_ground = ent->z - target_vec.z;
 }
 
 // check if cct can stand up or not
@@ -547,6 +565,9 @@ void cct_update(ENTITY *ent, CCT *cct)
 		// handle crawling
 		cct_crawling(ent, cct);
 		
+		// check for surface bellow
+		cct_ground_trace(ent, cct);
+		
 		// get input for cct
 		cct_input(ent, cct);
 		
@@ -558,9 +579,6 @@ void cct_update(ENTITY *ent, CCT *cct)
 		
 		// apply horizontal movement
 		cct_horizontal_movement(ent, cct);
-		
-		// check for surface bellow
-		cct_ground_trace(ent, cct);
 		
 		// check if cct can stand up or not
 		cct_check_head(ent, cct);

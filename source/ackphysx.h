@@ -9,7 +9,7 @@
 	#define PRAGMA_BIND "PhysXLoader.dll";
 	#define PRAGMA_BIND "PhysXCooking.dll";
 	#define PRAGMA_BIND "NxCharacter.dll";
-	#define PRAGMA_BIND "cudart32_30_9.dll";
+	#define PRAGMA_BIND "cudart32_41_22.dll";
 
 	// foundation
 
@@ -288,34 +288,34 @@
 
 	//main functions
 	void* physX_load(); // returns NxPhysicsSDK pointer
-	function physX_destroy();
+	void physX_destroy();
 	void* physX_run(var deltatime); // 0 => use fixed time steps; returns NxScene pointer
 
 
 	//return number of actors for num == 1
-	function pX_stats(var);
+	var pX_stats(var);
 
 	// Continuous Collision Detection. Set it, after you loaded the PhysX engine.
 	// you have to use pXent_SetCCDSkeleton(entity) to see the effect!
-	function pX_setccd(var);
+	var pX_setccd(var);
 
 	// var1 = sets the speed of the simulation, 60 is default (intern 1/60).
 	// var2 = maxIter provides a cap on the number of sub steps executed, per time step, 8 is default.
 	// var3 = TimeStep Methods: NX_TIMESTEP_FIXED NX_TIMESTEP_VARIABLE NX_TIMESTEP_INHERIT
-	function pX_setsteprate(var,var,var);
+	var pX_setsteprate(var,var,var);
 
 	// scales the A7 world -> more realistic result.
 	// a good value is around 0.05 for the carlevel, but it depends on size of your objects (A7 units convert to meter)
-	function pX_setunit(var); // default: 1/40
+	void pX_setunit(var); // default: 1/40
 
 	// pauses the NVIDIA PhysX engine or rather the physX_run function
-	function pX_pause(var);
+	void pX_pause(var);
 
 	// set the number of the groups, the third parameter defines whether they collide or not
 	function pX_setgroupcollision(var, var, var);
 
 	// change the force mode, affects: pXent_addcentralforce, pXent_addforceglobal, pXent_addforcelocal,...
-	function pX_setforcemode(var);
+	var pX_setforcemode(var);
 
 	// system functions
 
@@ -827,7 +827,7 @@
 	function pXent_kinematic ( ENTITY*, var );
 
 	// you can pick dynamic actors with the mouse; put it in the main loop
-	function pX_pick();
+	void pX_pick();
 
 
 	//adopted functions:

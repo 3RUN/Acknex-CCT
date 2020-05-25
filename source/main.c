@@ -2,7 +2,9 @@
 #include <acknex.h>
 #include <default.c>
 #include <windows.h>
-#include <ackphysx.h>
+
+// <ackphysx.h> will bring trash into WED action list
+#include "ackphysx.h"
 
 #define PRAGMA_POINTER
 
@@ -13,9 +15,31 @@
 var pX_gravity = 9.81;
 var pX_unitscale = 0.075;
 
+// we include stuff this way, in order to avoid unneeded dependencies
+// like function, or variable not being found etc... 
 #include "defines.h"
 #include "cct.h"
+#include "cct_helper.h"
+#include "cct_logic.h"
 #include "player.h"
+#include "player_camera.h"
+#include "player_logic.h"
+#include "props.h"
+#include "props_helper.h"
+#include "props_platform.h"
+#include "props_elevator.h"
+
+#include "defines.c"
+#include "cct.c"
+#include "cct_helper.c"
+#include "cct_logic.c"
+#include "player.c"
+#include "player_camera.c"
+#include "player_logic.c"
+#include "props.c"
+#include "props_helper.c"
+#include "props_platform.c"
+#include "props_elevator.c"
 
 void engine_lock_mouse()
 {
@@ -69,6 +93,11 @@ void on_ent_remove_event(ENTITY *ent)
 		delete_player_struct(ent);
 	}
 	
+	if(ent->OBJ_TYPE == TYPE_ELEVATOR || ent->OBJ_TYPE == TYPE_PLATFORM)
+	{
+		delete_props_struct(ent);
+	}
+	
 	if(!ent->parent)
 	{
 		ptr_remove(ent->parent);
@@ -88,14 +117,46 @@ void on_frame_event()
 	time_factor = 1;
 	if(mouse_right){ time_factor = 0.25; }
 	
+	// lower framerate to check framerate independency
+	fps_max = 60;
+	if(key_e){ fps_max = 30; }
+	
 	// toggle through all entities here and run their update functions!
 	// this helps us to stop using while loops with annoying 'wait' 
 	ENTITY *next_ent = NULL;
+	
+	// platform ?
+	FOR_ENT_OF_TYPE(next_ent, TYPE_PLATFORM)
+	{
+		platform_update(next_ent);
+	}
+	
+	// elevator ?
+	FOR_ENT_OF_TYPE(next_ent, TYPE_ELEVATOR)
+	{
+		elevator_update(next_ent);
+	}
 	
 	// player ?
 	FOR_ENT_OF_TYPE(next_ent, TYPE_PLAYER)
 	{
 		player_update(next_ent);
+	}
+	
+	// cleanup all entities that should be deleted
+	// this is useful (thanks to MasterQ32) since 
+	// entity will be deleted at the end of the frame
+	{
+		ENTITY *ent = ent_next(NULL);
+		while(ent)
+		{
+			you = ent;
+			ent = ent_next(ent);
+			if(your->OBJ_DELETE == true)
+			{
+				safe_remove(you);
+			}
+		}
 	}
 }
 
