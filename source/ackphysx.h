@@ -1,5 +1,5 @@
-#ifndef ackphysx_h
-	#define ackphysx_h
+#ifndef _ACKPHYSX_H_
+	#define _ACKPHYSX_H_
 
 	float fixedDeltaTime = 0;
 

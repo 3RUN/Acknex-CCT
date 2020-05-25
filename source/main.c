@@ -3,9 +3,6 @@
 #include <default.c>
 #include <windows.h>
 
-// <ackphysx.h> will bring trash into WED action list
-#include "ackphysx.h"
-
 #define PRAGMA_POINTER
 
 #define PRAGMA_PATH "code"
@@ -14,6 +11,9 @@
 // physics settings
 var pX_gravity = 9.81;
 var pX_unitscale = 0.075;
+
+// <ackphysx.h> will bring trash into WED action list
+#include "ackphysx.h"
 
 // we include stuff this way, in order to avoid unneeded dependencies
 // like function, or variable not being found etc... 
