@@ -1,9 +1,9 @@
-#ifndef ACKPHYSX_H
-	#define ACKPHYSX_H
+#ifndef ackphysx_h
+	#define ackphysx_h
 
 	float fixedDeltaTime = 0;
 
-	#define PRAGMA_BIND "ackphysx.dll";
+	#define PRAGMA_BIND "ackphysX.dll";
 	#define PRAGMA_BIND "PhysXCore.dll";
 	#define PRAGMA_BIND "PhysXDevice.dll";
 	#define PRAGMA_BIND "PhysXLoader.dll";
@@ -288,34 +288,34 @@
 
 	//main functions
 	void* physX_load(); // returns NxPhysicsSDK pointer
-	void physX_destroy();
+	function physX_destroy();
 	void* physX_run(var deltatime); // 0 => use fixed time steps; returns NxScene pointer
 
 
 	//return number of actors for num == 1
-	var pX_stats(var);
+	function pX_stats(var);
 
 	// Continuous Collision Detection. Set it, after you loaded the PhysX engine.
 	// you have to use pXent_SetCCDSkeleton(entity) to see the effect!
-	var pX_setccd(var);
+	function pX_setccd(var);
 
 	// var1 = sets the speed of the simulation, 60 is default (intern 1/60).
 	// var2 = maxIter provides a cap on the number of sub steps executed, per time step, 8 is default.
 	// var3 = TimeStep Methods: NX_TIMESTEP_FIXED NX_TIMESTEP_VARIABLE NX_TIMESTEP_INHERIT
-	var pX_setsteprate(var,var,var);
+	function pX_setsteprate(var,var,var);
 
 	// scales the A7 world -> more realistic result.
 	// a good value is around 0.05 for the carlevel, but it depends on size of your objects (A7 units convert to meter)
-	void pX_setunit(var); // default: 1/40
+	function pX_setunit(var); // default: 1/40
 
 	// pauses the NVIDIA PhysX engine or rather the physX_run function
-	void pX_pause(var);
+	function pX_pause(var);
 
 	// set the number of the groups, the third parameter defines whether they collide or not
 	function pX_setgroupcollision(var, var, var);
 
 	// change the force mode, affects: pXent_addcentralforce, pXent_addforceglobal, pXent_addforcelocal,...
-	var pX_setforcemode(var);
+	function pX_setforcemode(var);
 
 	// system functions
 
@@ -486,10 +486,7 @@
 
 	// rotate a physics or kinematic entity, or a character controller
 	var pXent_rotate(ENTITY*,ANGLE* vAngle,ANGLE* vAbsAngle);
-	
-	// increase, decrease size of a character controller
-	var pXent_updateCharacterExtents(ENTITY* ent, float stepOffset, float height, int is_crawling);
-	
+
 	function pXent_setmaterial(ENTITY*, VECTOR*, VECTOR*, VECTOR*);
 
 	// create a radial explosion; parameter: entity, vPos, force, radius
@@ -819,6 +816,7 @@
 	BOOL pXconRemoveWheelFirst (ENTITY*);
 	BOOL pXconRemoveWheelLast (ENTITY*);
 
+
 	// get revJoint->getGlobalAnchor() Vector
 	function pXcon_getanchorpoint(ENTITY* ent,VECTOR* point);
 
@@ -829,7 +827,7 @@
 	function pXent_kinematic ( ENTITY*, var );
 
 	// you can pick dynamic actors with the mouse; put it in the main loop
-	void pX_pick();
+	function pX_pick();
 
 
 	//adopted functions:
@@ -1394,7 +1392,11 @@
 
 	// tests if the sphere intersects another sphere
 	BOOL pXsphereIntersect (NxSphere* s, NxSphere* other);
+	
+	// character controller
 
+	// increase, decrease size of a character controller
+	var pXent_updateCharacterExtents(ENTITY* ent, float stepOffset, float height, int is_crawling);	
 
 	/////////////////////////////////////////////////////////
 	void *NxPhysicsSDK = NULL;

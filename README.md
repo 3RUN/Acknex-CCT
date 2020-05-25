@@ -2,8 +2,8 @@
  
 Simple cct (character controller) made with PhysX (SDK 2.8.4) plugin.
 I've modified ackphysx.dll community version plugin, to get more PH_CHAR features.
-I've ONLY tested this on my machine, so I can't garantee that it will work 100% on yours (but it should).
-This template works only with CAPSULE hull, and I don't really recommend trying to work with BOX (it sucks in 2.x SDK).
+Tested on several machines, it should work out of the box!
+This template works only with CAPSULE hull! I don't recommend using BOX hull!
 
 It currently supports:
 - gravity + jumping
@@ -20,6 +20,7 @@ There are lots of limitations to this movement template, mainly caused by physX 
 But by learning how the demo scene is made and setup you'll be able to get (more or less) suitable results.
 Mainly I would advice to keep the same size and don't increase/decrease world scale!
 Currently 40quants = 1 meter, NPC is 64 quant height.
+To make sure that correct .dll was loaded, there is a function called ackphysxHelloWorld();
 
 CREDITS:
 - original physX plugin was made by Chris Kahler
