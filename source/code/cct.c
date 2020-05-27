@@ -36,28 +36,25 @@ void initialize_cct_struct(ENTITY *ent, CCT *cct)
 	// we need to create crawling hull first
 	vec_set(&ent->scale_x, vector(1, 1, 0.5));
 	c_setminmax(ent);
+	ent->z -= ent->max_z;
 	pXent_settype(ent, PH_CHAR, CCT_HULL);
-	
-	// we need to change this when we go from stand to crawl visaversa
-	// 0.4 for standing, 0.35 for crawling (in order to fit the holes)
-	// we do that in cct_toggle_size function (it's in cct_logic.c check it out)
-	cct->cct_step_height = 0.4;
-	
-	// bbox height (standing size)
-	// you need to change this value, if you are using different capsule model or with different bbox size
-	// current bbox size is X: 16x2 Y: 16x2 Z: 32x2
-	// so f.e. if you use bbox with height 32 in total, reduce this value to 1.0
-	cct->cct_bbox_height = 2.0;
 	
 	// reset back to standing (normal) size
 	vec_set(&ent->scale_x, vector(1, 1, 1));
 	c_setminmax(ent);
-	ent->min_z *= 0.9;
 	cct->stand_max_z = ent->max_z;
+	ent->min_z *= 0.9;
+	pXent_setposition(ent, vector(ent->x, ent->y, ent->z + ent->max_z / 2));
+	
+	// step height is 1/4 of the bbox half size
+	cct->step_height = (ent->max_z / 4) -  1; // -1 quant to fit crawling holes easier
+	
+	// bbox height is 1/2 of the bbox size
+	cct->bbox_height = ent->max_z;
 	
 	// we call this function to update cct's size
 	// we also use false for 'isCrawling' boolean, since from start cct isn't crawling
-	pXent_updateCharacterExtents(ent, cct->cct_step_height, cct->cct_bbox_height, false);
+	pXent_updateCharacterExtents(ent, cct->step_height, cct->bbox_height, false);
 	
 	// we could also make cct completely passable
 	// but I prefer to use groups in order to get more flexable results

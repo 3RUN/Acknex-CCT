@@ -11,9 +11,8 @@
 // physics settings
 var pX_gravity = 9.81;
 
-// don't change this, as it affects cct size too
 // current world size is 40 quants = 1 meter
-var pX_unitscale = 0.075;
+var pX_unitscale = 0.05;
 
 // <ackphysx.h> will bring trash into WED action list
 #include "ackphysx.h"

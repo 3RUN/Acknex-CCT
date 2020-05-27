@@ -2,25 +2,22 @@
 // toggle crawling/standing hulls
 void cct_toggle_size(ENTITY *ent, CCT *cct, int is_crawling)
 {
+	// visual cosmetics for the bbox mesh
+	// this doesn't affect cct collision hull at all
 	if(cct->is_crawl_mode_on == true)
 	{
-		cct->cct_step_height = 0.35;
 		vec_set(&ent->scale_x, vector(1, 1, 0.5));
 		c_setminmax(ent);
 	}
 	else
 	{
-		cct->cct_step_height = 0.4;
 		vec_set(&ent->scale_x, vector(1, 1, 1));
 		c_setminmax(ent);
 		ent->min_z *= 0.9;
 	}
 	
-	// height (standing)
-	cct->cct_bbox_height = 2.0;
-	
 	// toggle crawling/standing size
-	pXent_updateCharacterExtents(ent, cct->cct_step_height, cct->cct_bbox_height, is_crawling);
+	pXent_updateCharacterExtents(ent, cct->step_height, cct->bbox_height, is_crawling);
 }
 
 // toggle crawling on/off
@@ -587,13 +584,10 @@ void cct_update(ENTITY *ent, CCT *cct)
 	// find origin for the given cct
 	vec_set(&cct->origin, vector(ent->x, ent->y, ent->z + cct->origin_z_offset));
 	
-	// here we try to fix the Z difference between standing/crawling states
-	// I found this value (13.474) by checking Z height of cct->origin at each state (stand/crawl)
-	// then I subtracted crawl heigh from standing height, and got this weird (but working) value
-	// I recommend doing that if you will use different scale/size for bbox
+	// to prevent 'jumping' of the offset, define the z offset after defining the offset vector itself
 	cct->origin_z_offset = 0;
 	if(cct->is_crawl_mode_on == true)
 	{
-		cct->origin_z_offset = 13.474;
+		cct->origin_z_offset = cct->bbox_height / 2;
 	}
 }

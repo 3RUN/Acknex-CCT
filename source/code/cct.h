@@ -30,8 +30,8 @@
 		var distance_to_ground;
 		
 		// cct parameters
-		float cct_step_height;
-		float cct_bbox_height;
+		float step_height;
+		float bbox_height;
 		
 		// save full size max_z
 		// needed for ground trace
