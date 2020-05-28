@@ -6,6 +6,7 @@ Tested on several machines, it should work out of the box!
 This template works only with CAPSULE hull! I don't recommend using BOX hull!
 
 It currently supports:
+- collision masks (GROUP_NON_COLLIDABLE, GROUP_COLLIDABLE_NON_PUSHABLE, GROUP_COLLIDABLE_PUSHABLE)
 - gravity + jumping
 - inertia
 - crawling (UpdateCharacterExtents)
