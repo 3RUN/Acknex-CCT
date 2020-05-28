@@ -31,7 +31,7 @@ void cct_toggle_crawl(ENTITY *ent, CCT *cct)
 	}
 	
 	// only if not on slope
-	if(cct->surface_normal.z <= 1 && cct->surface_normal.z >= cct_slope_fac)
+	if(cct->ground_info != GROUND_STEEP_SLOPE)
 	{
 		if(cct->crawl == true)
 		{
@@ -180,7 +180,7 @@ void cct_input(ENTITY *ent, CCT *cct)
 	else // but if on ground
 	{
 		// and on slope (and not vertical wall)
-		if(cct->surface_normal.z < cct_slope_fac && cct->surface_normal.z > 0 && is_cct_allowed_to_slide_on_slopes == true)
+		if(cct->ground_info == GROUND_STEEP_SLOPE && is_cct_allowed_to_slide_on_slopes == true)
 		{
 			// reduce input force, so cct won't be able to climb up the slopes
 			cct->input.x *= cct_input_slope_slowdown_factor;
@@ -204,7 +204,7 @@ void cct_slide_on_slope(CCT *cct)
 	}
 	
 	// if slope is too steep (but not a verical wall)
-	if(cct->surface_normal.z < cct_slope_fac && cct->surface_normal.z > 0 && is_cct_allowed_to_slide_on_slopes == true)
+	if(cct->ground_info == GROUND_STEEP_SLOPE && is_cct_allowed_to_slide_on_slopes == true)
 	{
 		if(cct->z_force > 0)
 		{
@@ -238,7 +238,7 @@ void cct_slide_on_slope(CCT *cct)
 void cct_jump(CCT *cct)
 {
 	// don't allow to jump, if we are on slope
-	if(cct->surface_normal.z < cct_slope_fac && cct->surface_normal.z > 0 && is_cct_allowed_to_slide_on_slopes == true)
+	if(cct->ground_info == GROUND_STEEP_SLOPE && is_cct_allowed_to_slide_on_slopes == true)
 	{
 		return;
 	}
@@ -465,7 +465,12 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 			if(tex_flag8)
 			{
 				vec_set(&cct->surface_normal, &normal);
-				cct->ground_info = GROUND_STEEP_SLOPE;
+				
+				// too steep?
+				if(cct->surface_normal.z < cct_slope_fac && cct->surface_normal.z > 0)
+				{
+					cct->ground_info = GROUND_STEEP_SLOPE;
+				}
 			}
 		}
 		
@@ -476,7 +481,12 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 			if(is(your, FLAG8))
 			{
 				vec_set(&cct->surface_normal, &normal);
-				cct->ground_info = GROUND_STEEP_SLOPE;
+				
+				// too steep?
+				if(cct->surface_normal.z < cct_slope_fac && cct->surface_normal.z > 0)
+				{
+					cct->ground_info = GROUND_STEEP_SLOPE;
+				}
 			}
 			
 			// if this entity can move us
