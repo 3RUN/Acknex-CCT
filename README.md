@@ -38,6 +38,7 @@ CREDITS:
 - based on ackphysX community plugin by Christian Behrenberg aka (HeelX) https://sourceforge.net/p/a8physx/home/Home/
 - prototype.wad by Damocles (can be also found in AUM 100)
 - elevator and platform sounds are taken from Freedoom project https://freedoom.github.io/ https://github.com/freedoom/freedoom
+- crate model from old Newton plugin demo which was made by thomas oppl in 2007 (unfortunately I don't know who made the model itself)
 
 SCREENSHOTS:
 ![Alt text](https://github.com/3RUN/Acknex-CCT/blob/master/screenshots/shot_0.jpg?raw=true "Preview 1.")
