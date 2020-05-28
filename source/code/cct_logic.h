@@ -9,6 +9,7 @@
 	#define GROUND_SOLID 0
 	#define GROUND_STAIRS 1
 	#define GROUND_MOVING 2
+	#define GROUND_STEEP_SLOPE 3
 
 	// cct parameters
 	var cct_gravity = 4; // gravity force strength (gravity force increases each time_step with this value)

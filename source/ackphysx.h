@@ -10,6 +10,11 @@
 	#define PRAGMA_BIND "PhysXCooking.dll";
 	#define PRAGMA_BIND "NxCharacter.dll";
 	#define PRAGMA_BIND "cudart32_41_22.dll";
+	
+	// cct collision groups
+	#define GROUP_NON_COLLIDABLE 0
+	#define GROUP_COLLIDABLE_NON_PUSHABLE 1
+	#define GROUP_COLLIDABLE_PUSHABLE 2
 
 	// foundation
 

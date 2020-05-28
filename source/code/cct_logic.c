@@ -447,7 +447,6 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 	if(HIT_TARGET)
 	{
 		vec_set(&target_vec, &target);
-		vec_set(&cct->surface_normal, &normal);
 		
 		// level block
 		if(you == NULL)
@@ -458,11 +457,28 @@ void cct_ground_trace(ENTITY *ent, CCT *cct)
 			{
 				cct->ground_info = GROUND_STAIRS;
 			}
+			
+			// we can slide only on blocks with FLAG8 set ON
+			// this is needed to avoid normal.z jerking on polygon edges
+			// when we are moving on normal, non sliding slopes !
+			// for sliding slopes that jerking bug (is it?) doesn't really matter
+			if(tex_flag8)
+			{
+				vec_set(&cct->surface_normal, &normal);
+				cct->ground_info = GROUND_STEEP_SLOPE;
+			}
 		}
 		
 		// models
 		if(you != NULL)
 		{
+			// same as above (for sliding) but only for models with FLAG8 set on
+			if(is(your, FLAG8))
+			{
+				vec_set(&cct->surface_normal, &normal);
+				cct->ground_info = GROUND_STEEP_SLOPE;
+			}
+			
 			// if this entity can move us
 			if(your->OBJ_CAN_MOVE_CCT == true)
 			{

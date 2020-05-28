@@ -27,7 +27,7 @@ void initialize_cct_struct(ENTITY *ent, CCT *cct)
 {
 	// NOTE that real cct size and visual size in game are different!
 	// I was able to get 1:1 size, but it's not useful in game, since to that 1:1 size, you have to add 
-	// skinWidth, which will make real cct size bigger than the visual model anyway... 
+	// skinWidth (which is 1.0 quant), which will make real cct size bigger than the visual model anyway... 
 	// it would also prevent from crawling in small holes !
 	// currently, you can crawl in holes which are 4 quants bigger than your bbox
 	// so remember this, when making vents or other holes, where cct should be able to fit
@@ -47,7 +47,7 @@ void initialize_cct_struct(ENTITY *ent, CCT *cct)
 	pXent_setposition(ent, vector(ent->x, ent->y, ent->z + ent->max_z / 2));
 	
 	// step height is 1/4 of the bbox half size
-	cct->step_height = (ent->max_z / 4) -  1; // -1 quant to fit crawling holes easier
+	cct->step_height = (ent->max_z / 4) - 1; // -1 quant to fit crawling holes easier
 	
 	// bbox height is 1/2 of the bbox size
 	cct->bbox_height = ent->max_z;

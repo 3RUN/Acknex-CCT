@@ -45,6 +45,53 @@ var pX_unitscale = 0.05;
 #include "props_elevator.c"
 #include "props_terrain.c"
 
+// doesn't affect cct's movement
+// pushed away from cct
+action box_non_collidable()
+{
+	set(my, LIGHT | UNLIT);
+	vec_set(&my->blue, vector(0, 0, 255));
+	c_setminmax(my);
+	
+	// this needs to be set before registering the object
+	// after it's registered, you can change it as you wish (for OBB collision system)
+	my->group = GROUP_NON_COLLIDABLE;
+	pXent_settype(my, PH_RIGID, PH_BOX);
+	pXent_setdamping(my, 100, 100);
+}
+
+// blocks cct's movement
+// can't be pushed away from cct
+// this is more like a static object, but can be pushed by other rigid bodies
+action box_non_pushable()
+{
+	set(my, LIGHT | UNLIT);
+	vec_set(&my->blue, vector(128, 128, 128));
+	c_setminmax(my);
+	
+	// this needs to be set before registering the object
+	// after it's registered, you can change it as you wish (for OBB collision system)
+	my->group = GROUP_COLLIDABLE_NON_PUSHABLE;
+	pXent_settype(my, PH_RIGID, PH_BOX);
+	pXent_setdamping(my, 100, 100);
+}
+
+// blocks cct's movement
+// can be pushed away from cct !
+// we can even jump on top of this one !
+action box_pushable()
+{
+	set(my, LIGHT | UNLIT);
+	vec_set(&my->blue, vector(255, 255, 255));
+	c_setminmax(my);
+	
+	// this needs to be set before registering the object
+	// after it's registered, you can change it as you wish (for OBB collision system)
+	my->group = GROUP_COLLIDABLE_PUSHABLE;
+	pXent_settype(my, PH_RIGID, PH_BOX);
+	pXent_setdamping(my, 100, 100);
+}
+
 void engine_lock_mouse()
 {
 	static var autolock_mouse_locked = false;
