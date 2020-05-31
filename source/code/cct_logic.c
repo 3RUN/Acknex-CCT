@@ -17,7 +17,7 @@ void cct_toggle_size(ENTITY *ent, CCT *cct, int is_crawling)
 	}
 	
 	// toggle crawling/standing size
-	pXent_updateCharacterExtents(ent, cct->step_height, cct->bbox_height, is_crawling);
+	pXent_updateCharacterExtents(ent, cct->bbox_height, is_crawling);
 }
 
 // toggle crawling on/off

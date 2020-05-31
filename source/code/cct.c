@@ -46,15 +46,12 @@ void initialize_cct_struct(ENTITY *ent, CCT *cct)
 	ent->min_z *= 0.9;
 	pXent_setposition(ent, vector(ent->x, ent->y, ent->z + ent->max_z / 2));
 	
-	// step height is 1/4 of the bbox half size
-	cct->step_height = (ent->max_z / 4) - 1; // -1 quant to fit crawling holes easier
-	
 	// bbox height is 1/2 of the bbox size
 	cct->bbox_height = ent->max_z;
 	
 	// we call this function to update cct's size
 	// we also use false for 'isCrawling' boolean, since from start cct isn't crawling
-	pXent_updateCharacterExtents(ent, cct->step_height, cct->bbox_height, false);
+	pXent_updateCharacterExtents(ent, cct->bbox_height, false);
 	
 	// we could also make cct completely passable
 	// but I prefer to use groups in order to get more flexable results

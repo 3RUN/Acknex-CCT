@@ -1,6 +1,11 @@
 #ifndef _CCT_H_
 	#define _CCT_H_
 	
+	// CCT settings (float)
+	#define CCT_SKIN_WIDTH 1.0
+	#define CCT_STEP_OFFSET 7.0 // (capsule->max_z / 4) - 1
+	#define CCT_SLOPE_LIMIT 0.0 // disable slope limit, because it works weird...
+	
 	// cct hull shape
 	// I highly recommend using only capsule hull!
 	// box will get stuck in lots of situations and not supported by this template!
@@ -29,8 +34,7 @@
 		var ground_info;
 		var distance_to_ground;
 		
-		// cct parameters
-		float step_height;
+		// cct standing height
 		float bbox_height;
 		
 		// save full size max_z

@@ -10,9 +10,9 @@
 
 // physics settings
 var pX_gravity = 9.81;
-
-// current world size is 40 quants = 1 meter
-var pX_unitscale = 0.05;
+var pX_unitscale = 0.05; // current world size is 40 quants = 1 meter
+var pX_static_friction = 0; // all static bodies registered on physX_level_load call will have this friction set
+var pX_static_restitution = 0; // same as above but for restitution (bounciness)
 
 // <ackphysx.h> will bring trash into WED action list
 #include "ackphysx.h"
@@ -57,6 +57,8 @@ action box_non_collidable()
 	// after it's registered, you can change it as you wish (for OBB collision system)
 	my->group = GROUP_NON_COLLIDABLE;
 	pXent_settype(my, PH_RIGID, PH_BOX);
+	pXent_setfriction(my, 50);
+	pXent_setelasticity(my, 50);
 	pXent_setdamping(my, 100, 100);
 }
 
@@ -73,6 +75,8 @@ action box_non_pushable()
 	// after it's registered, you can change it as you wish (for OBB collision system)
 	my->group = GROUP_COLLIDABLE_NON_PUSHABLE;
 	pXent_settype(my, PH_RIGID, PH_BOX);
+	pXent_setfriction(my, 50);
+	pXent_setelasticity(my, 50);
 	pXent_setdamping(my, 100, 100);
 }
 
@@ -89,6 +93,8 @@ action box_pushable()
 	// after it's registered, you can change it as you wish (for OBB collision system)
 	my->group = GROUP_COLLIDABLE_PUSHABLE;
 	pXent_settype(my, PH_RIGID, PH_BOX);
+	pXent_setfriction(my, 50);
+	pXent_setelasticity(my, 50);
 	pXent_setdamping(my, 100, 100);
 }
 
@@ -119,6 +125,9 @@ void set_engine_physics()
 	ph_check_distance = 2;
 	pX_setccd(1);
 	pX_setgravity(vector(0, 0, -pX_gravity));
+	
+	// set character controller settings
+	pXent_setCharacterSettings(CCT_SKIN_WIDTH, CCT_STEP_OFFSET, CCT_SLOPE_LIMIT);
 }
 
 void set_engine_settings()

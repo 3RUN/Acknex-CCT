@@ -1401,7 +1401,14 @@
 	// character controller
 
 	// increase, decrease size of a character controller
-	var pXent_updateCharacterExtents(ENTITY* ent, float stepOffset, float height, int is_crawling);	
+	var pXent_updateCharacterExtents(ENTITY* ent, float height, int is_crawling);
+	
+	// set settings for all ccts (which are created after this function call)
+	// if skinWidth is <= 0 it's set to 0.01 by default
+	// if stepOffset is <= 0 it's set to 0.01 by default
+	// if slopeLimit is <= 0 then slope limits is disabled, set it to desired angle in degrees (f.e. 45)
+	// but I would highly recommend not to use slopeLimit at all, cause it's working really weird in physX 2.x
+	void pXent_setCharacterSettings(float skinWidth, float stepOffset, float slopeLimit);
 
 	/////////////////////////////////////////////////////////
 	void *NxPhysicsSDK = NULL;
@@ -1423,8 +1430,8 @@
 		if(level_ent)
 		{
 			pXent_settype(level_ent, PH_STATIC, PH_POLY);
-			pXent_setfriction(level_ent, 100);
-			pXent_setelasticity(level_ent, 0);
+			pXent_setfriction(level_ent, pX_static_friction);
+			pXent_setelasticity(level_ent, pX_static_restitution);
 		}
 		
 		for(you = ent_next(NULL); you; you = ent_next(you))
@@ -1450,14 +1457,14 @@
 			if(type == 4)
 			{
 				pXent_settype(you, PH_STATIC, PH_TERRAIN);
-				pXent_setfriction(you, 100);
-				pXent_setelasticity(you, 0);
+				pXent_setfriction(you, pX_static_friction);
+				pXent_setelasticity(you, pX_static_restitution);
 			}
 			else
 			{
 				pXent_settype(you, PH_STATIC, PH_POLY);
-				pXent_setfriction(you, 100);
-				pXent_setelasticity(you, 0);
+				pXent_setfriction(you, pX_static_friction);
+				pXent_setelasticity(you, pX_static_restitution);
 			}
 		}
 		on_level_load_px();
