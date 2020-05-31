@@ -7,10 +7,11 @@ This template works only with CAPSULE hull! I don't recommend using BOX hull!
 
 It currently supports:
 - collision masks (GROUP_NON_COLLIDABLE, GROUP_COLLIDABLE_NON_PUSHABLE, GROUP_COLLIDABLE_PUSHABLE)
+- pXent_updateCharacterExtents for crawling/standing
+- pXent_setCharacterSettings for changing skinWidth, stepOffset and slopeLimit for all ccts
 - gravity + jumping
 - inertia
-- crawling (UpdateCharacterExtents)
-- sliding on slopes (better not to use)
+- sliding on slopes
 - 3d camera with collision detection and zooming
 - kinematic platform (following the path) + elevator (moving to target position and back)
 - added helper functions to check, if props have smashed the cct
@@ -22,16 +23,18 @@ Known issues:
 	this causes some weird movement on slopes if sliding is enabled, to void this problem, disable sliding
 	also in screenshot folder you can see that 'Use Tesselation' flag in Map Compiler makes even more polygons/edges
 	thus that will cause a lot of jittering on slope movement (cause on edges normal.z goes beyond the slope limit - can be seen in video)
-
+	
 You can see cct in motion on my youtube channel:
 https://youtu.be/mfTzt57JoAw
 
 # HOW TO USE ?
 There are lots of limitations to this movement template, mainly caused by physX itself (old SDK).
 But by learning how the demo scene is made and setup you'll be able to get (more or less) suitable results.
-Mainly I would advice to keep the same size and don't increase/decrease world scale!
-Currently 40quants = 1 meter, NPC is 64 quant height.
-To make sure that correct .dll was loaded, there is a function called ackphysxHelloWorld();
+- Mainly I would advice to keep the same size and don't increase/decrease world scale!
+	Currently 40quants = 1 meter, NPC is 64 quant height.
+- To make sure that correct .dll was loaded, there is a function called ackphysxHelloWorld();
+- To make slope slidable, set it's FLAG8 in WED
+
 
 CREDITS:
 - original physX plugin was made by Chris Kahler
